@@ -1,0 +1,30 @@
+library(rvest)
+
+url <- "https://rvest.tidyverse.org/articles/starwars.html"
+html <- read_html(url)
+cat(as.character(html))
+
+section_elements <- html_elements(html, "section")
+
+h2_elements <- html_elements(section_elements, "h2")   # extracts all h2 elements
+movie_id <- html_attr(h2_elements, "data-id")
+
+movie_title <- html_text(h2_elements, trim = TRUE)
+
+director_elements <- html_elements(html, ".director")
+director <- html_text(director_elements, TRUE)
+
+p_elements <- html_elements(html, "p")
+
+date_elements <- p_elements[grepl("Released: ", p_elements)]
+
+release_date <- html_text(date_elements, trim=TRUE)
+release_date <- gsub("Released:", "", release_date)
+
+crawl_elements <- html_elements(html, ".crawl")
+
+star_wars_list <- data.frame(movie_id, movie_title, director, release_date, description)
+star_wars_list
+
+
+description <- html_text(crawl_elements, trim = TRUE)
