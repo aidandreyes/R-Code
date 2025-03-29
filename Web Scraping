@@ -1,5 +1,8 @@
+# Load rvest library
 library(rvest)
 
+# -------------------
+# Load html file
 url <- "https://rvest.tidyverse.org/articles/starwars.html"
 html <- read_html(url)
 cat(as.character(html))
