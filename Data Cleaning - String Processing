@@ -1,1 +1,4 @@
+# read file
+movies <- read.csv("https://raw.githubusercontent.com/khasenst/datasets_teaching/refs/heads/main/movies.csv", header = FALSE)
+
 
